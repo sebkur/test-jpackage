@@ -5,3 +5,4 @@ dist
 .settings
 .gradle
 build
+*.swp
