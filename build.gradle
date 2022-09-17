@@ -55,6 +55,6 @@ tasks.jpackage {
     javaOptions = ["-Dfile.encoding=UTF-8"]
 
     windows {
-        winConsole = true
+        winDirChooser = true
     }
 }
