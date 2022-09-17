@@ -1,0 +1,47 @@
+wrapper {
+    gradleVersion = '7.4.2'
+}
+
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+group = pGroup
+version = pVersion
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven {
+        url 'http://mvn.topobyte.de'
+    }
+    mavenCentral()
+}
+
+dependencies {
+}
+
+mainClassName = 'de.topobyte.HelloSwing'
+
+task copyJars(type: Copy) {
+    into "$buildDir/lib-run"
+    from jar
+}
+
+task copyDeps(type: Copy) {
+    into "$buildDir/lib-run"
+    from configurations.runtimeClasspath
+}
+
+task createRuntime(dependsOn: [copyJars, copyDeps]) {
+    description 'Setup the execution environment for the scripts'
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'de.topobyte.HelloSwing'
+    }
+    baseName = 'hello-swing'
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
