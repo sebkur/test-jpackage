@@ -1,4 +1,4 @@
-# Hello Swing
+# Hello jpackage
 
 Build jar:
 
