@@ -53,8 +53,11 @@ tasks.jpackage {
     mainClass = mainClassName
 
     javaOptions = ["-Dfile.encoding=UTF-8"]
+    verbose = true
 
     windows {
         winDirChooser = true
+	// this make jpackage override some files such as main.wxs
+        resourceDir = "$projectDir/windows"
     }
 }

@@ -23,6 +23,11 @@
     <?define JpUpgradeVersionOnlyDetectDowngrade="yes"?>
   <?endif?>
 
+  <!-- The only way I found to reference the bmp image files is via the PWD env variable.
+       Unfortunately, the directory passed via 'resourceDir' is not copied entirely, but only
+       a fixed set of files is copied over to the temporary Wix build directory. -->
+  <?define JpResources = $(env.pwd)\windows?>
+
   <?include $(var.JpConfigDir)/overrides.wxi ?>
 
   <Product
@@ -40,6 +45,9 @@
       Compressed="$(var.JpCompressedMsi)"
       InstallScope="$(var.JpInstallScope)" Platform="x64"
     />
+
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.JpResources)\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.JpResources)\dialog.bmp" />
 
     <Media Id="1" Cabinet="Data.cab" EmbedCab="yes" />
 
