@@ -23,9 +23,10 @@
     <?define JpUpgradeVersionOnlyDetectDowngrade="yes"?>
   <?endif?>
 
-  <!-- The only way I found to reference the bmp image files is via the PWD env variable.
-       Unfortunately, the directory passed via 'resourceDir' is not copied entirely, but only
-       a fixed set of files is copied over to the temporary Wix build directory. -->
+  <!-- Unfortunately, the directory passed via 'resourceDir' is not copied entirely, but only
+       a fixed set of files is copied over to the temporary Wix build directory.
+       To work around this limitation, we're using the resources directly from the repository
+       here. -->
   <?define JpResources = $(env.GRADLE_DIR)\windows?>
 
   <?include $(var.JpConfigDir)/overrides.wxi ?>
